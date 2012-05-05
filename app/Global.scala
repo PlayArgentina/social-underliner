@@ -13,9 +13,9 @@ object Global extends GlobalSettings {
   override def onStart(app: Application){
     val actor = Akka.system.actorOf(Props[LoggerActor], name = "logger")
     Logger.debug(String.format("Actor from global -> %s", actor))
-    // Akka.system.scheduler.schedule(0 seconds, 1 seconds) {
-    //   actor ! Log("Test", "Code Mother Fucker!")
-    // }
+    Akka.system.scheduler.schedule(0 seconds, 1 seconds) {
+      actor ! Log("Test", "Code Mother Fucker!")
+    }
   }
 
 }

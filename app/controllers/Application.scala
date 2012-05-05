@@ -31,19 +31,7 @@ object Application extends Controller {
     
     val loggerActor = Akka.system.actorFor("user/logger")
     Logger.debug(String.format("Actor -> %s", loggerActor))
-    val future = (loggerActor ? Bind)
-    
-    future.onFailure { 
-      case e:Throwable => Logger.debug("Error!", e)
-    }
-    
-    future.onSuccess {
-      case BindOk(enumerator) => {
-        Logger.debug("The binded was successfull!")
-      }
-    }
-
-    future.asPromise.map {
+    (loggerActor ? Bind).asPromise.map {
       case BindOk(enumerator) => {
         Logger.debug("The binded was successfull!")
         (in, enumerator)

@@ -21,10 +21,9 @@ class LoggerActor extends Actor {
       channels += channel
       Logger.debug("New binding!")
       Logger.debug(String.format("Sender -> %s", sender))
-      sender ! channel
+      sender ! BindOk(channel)
     }
     case Log(from, message) => {
-      Logger.debug(String.format("Receive from: %s, message: %s", from, message))
       channels.foreach(_.push(String.format("%s: %s", from, message)))
     }
   }
