@@ -14,3 +14,9 @@ tmp
 test-result
 eclipse
 server.pid
+
+# Eclipse
+test
+target
+project/test
+project/target
